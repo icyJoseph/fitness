@@ -30,7 +30,7 @@ export default class App extends Component {
   render() {
     const { input, showInput } = this.state;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Image
           source={{
             uri: "https://tylermcginnis.com/tylermcginnis_glasses-300.png"
@@ -45,7 +45,7 @@ export default class App extends Component {
             onChange={this.handleTextChange}
           />
         )}
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
