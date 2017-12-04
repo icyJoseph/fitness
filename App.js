@@ -6,7 +6,8 @@ import {
   Slider,
   Switch,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Image
 } from "react-native";
 import AddEntry from "./components/AddEntry";
 
@@ -30,6 +31,12 @@ export default class App extends Component {
     const { input, showInput } = this.state;
     return (
       <View style={styles.container}>
+        <Image
+          source={{
+            uri: "https://tylermcginnis.com/tylermcginnis_glasses-300.png"
+          }}
+          style={styles.img}
+        />
         <Switch value={showInput} onValueChange={this.handleToggleSwitch} />
         {showInput === true && (
           <TextInput
@@ -70,5 +77,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#757575",
     margin: 30
+  },
+  img: {
+    width: 100,
+    height: 100,
+    margin: 50
   }
 });
