@@ -1,48 +1,24 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from "react-native";
+import { StyleSheet, Text, View, Slider } from "react-native";
 import AddEntry from "./components/AddEntry";
 
 export default class App extends Component {
-  handlePress = () => {
-    alert("Hello!");
+  state = {
+    value: 0
   };
 
   render() {
     return (
       <View style={styles.container}>
         <AddEntry />
-        <TouchableHighlight
-          style={styles.btn}
-          onPress={this.handlePress}
-          underlayColor="#d4271b"
-        >
-          <Text style={styles.btnTxt}>Touchable Highlight</Text>
-        </TouchableHighlight>
-        <TouchableOpacity style={styles.btn} onPress={this.handlePress}>
-          <Text style={styles.btnTxt}>Touchable Opacity</Text>
-        </TouchableOpacity>
-        <TouchableWithoutFeedback style={styles.btn} onPress={this.handlePress}>
-          <View style={styles.btn}>
-            <Text style={styles.btnTxt}>Touchable WithoutFeedback</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableNativeFeedback
-          background={TouchableNativeFeedback.SelectableBackground()}
-          style={styles.btn}
-          onPress={this.handlePress}
-        >
-          <View style={styles.btn}>
-            <Text style={styles.btnTxt}>Touchable Native Feedback</Text>
-          </View>
-        </TouchableNativeFeedback>
+        <Slider
+          minimumValue={-10}
+          maximumValue={10}
+          step={1}
+          value={this.state.value}
+          onValueChange={value => this.setState(() => ({ value }))}
+        />
+        <Text>Value: {this.state.value}</Text>
       </View>
     );
   }
