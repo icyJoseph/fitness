@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import DateHeader from "./DateHeader";
 import FitnessSlider from "./FitnessSlider";
+import TextButton from "./TextButton";
 import Steppers from "./Steppers";
 import { getMetricMetaInfo, timeToString } from "../utils/helpers";
+import { Ionicons } from "@expo/vector-icons";
 
 const SubmitBtn = ({ onPress }) => {
   return (
@@ -67,9 +69,26 @@ class AddEntry extends Component {
     // Clear Local Notification
   };
 
+  reset = () => {
+    const date = timeToString();
+
+    //Update Redux
+    //Route to Home
+    //Update DB
+  };
+
   render() {
     const metaInfo = getMetricMetaInfo();
     const date = new Date();
+    if (this.props.alreadyLogged) {
+      return (
+        <View>
+          <Ionicons name="ios-happy-outline" size={100} />
+          <Text>You already logged your information for today</Text>
+          <TextButton onPress={this.reset}>Reset</TextButton>
+        </View>
+      );
+    }
     return (
       <View>
         <DateHeader date={date.toLocaleDateString()} />
