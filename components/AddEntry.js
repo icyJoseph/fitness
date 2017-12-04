@@ -41,12 +41,14 @@ class AddEntry extends Component {
     }));
   };
 
+  submit = () => {};
+
   render() {
     const metaInfo = getMetricMetaInfo();
-    const date = timeToString();
+    const date = new Date();
     return (
       <View>
-        <DateHeader date={date} />
+        <DateHeader date={date.toLocaleDateString()} />
         {Object.keys(metaInfo).map(key => {
           const { getIcon, type, ...rest } = metaInfo[key];
           const value = this.state[key];
