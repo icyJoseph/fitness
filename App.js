@@ -42,7 +42,7 @@ export default class App extends Component {
           <TextInput
             style={styles.input}
             value={input}
-            onChange={this.handleTextChange}
+            onChangeText={this.handleTextChange}
           />
         )}
       </KeyboardAvoidingView>
