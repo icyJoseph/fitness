@@ -1,16 +1,43 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Slider } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Slider,
+  Switch,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
 import AddEntry from "./components/AddEntry";
 
 export default class App extends Component {
   state = {
-    value: 0
+    input: "@ic_joseph",
+    showInput: false
+  };
+  handleTextChange = input => {
+    this.setState(() => ({
+      input
+    }));
   };
 
+  handleToggleSwitch = () => {
+    this.setState(state => ({
+      showInput: !state.showInput
+    }));
+  };
   render() {
+    const { input, showInput } = this.state;
     return (
-      <View>
-        <AddEntry />
+      <View style={styles.container}>
+        <Switch value={showInput} onValueChange={this.handleToggleSwitch} />
+        {showInput === true && (
+          <TextInput
+            style={styles.input}
+            value={input}
+            onChange={this.handleTextChange}
+          />
+        )}
       </View>
     );
   }
@@ -35,5 +62,13 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#fff"
+  },
+  input: {
+    width: 200,
+    height: 44,
+    padding: 0,
+    borderWidth: 1,
+    borderColor: "#757575",
+    margin: 30
   }
 });
