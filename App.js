@@ -13,9 +13,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <View>
-        <AddEntry />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View>
+          <AddEntry />
+        </View>
+      </Provider>
     );
   }
 }
