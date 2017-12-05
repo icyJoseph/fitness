@@ -6,6 +6,7 @@ import TextButton from "./TextButton";
 import Steppers from "./Steppers";
 import { getMetricMetaInfo, timeToString } from "../utils/helpers";
 import { Ionicons } from "@expo/vector-icons";
+import { submitEntry, removeEntry } from "../utils/api";
 
 const SubmitBtn = ({ onPress }) => {
   return (
@@ -66,15 +67,17 @@ class AddEntry extends Component {
     // Update Redux
     // Navigate to home
     // Save to DB
+    submitEntry({ key, entry });
     // Clear Local Notification
   };
 
   reset = () => {
-    const date = timeToString();
+    const key = timeToString();
 
     //Update Redux
     //Route to Home
     //Update DB
+    removeEntry(key);
   };
 
   render() {
