@@ -138,3 +138,8 @@ const styles = StyleSheet.create({
     marginRight: 20
   }
 });
+export function getDailyReminderValue() {
+  return {
+    today: "👋 Don't forget to log your data today"
+  };
+}
