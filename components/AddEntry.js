@@ -114,7 +114,10 @@ class AddEntry extends Component {
     if (this.props.alreadyLogged) {
       return (
         <View style={styles.center}>
-          <Ionicons name="ios-happy-outline" size={100} />
+          <Ionicons
+            name={Platform.OS === "ios" ? "ios-happy-outline" : "md-happy"}
+            size={100}
+          />
           <Text>You already logged your information for today</Text>
           <TextButton style={{ padding: 10 }} onPress={this.reset}>
             Reset
