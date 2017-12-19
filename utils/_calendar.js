@@ -36,6 +36,16 @@ function setDummyData() {
 function setMissingDates(dates) {
   const length = Object.keys(dates).length;
   const timestamp = Date.now();
+  for (let i = -183; i < 0; i++) {
+    const time = timestamp + i * 24 * 60 * 60 * 1000;
+    const strTime = timeToString(time);
+
+    if (typeof dates[strTime] === "undefined") {
+      dates[strTime] = null;
+    }
+  }
+
+  return dates;
 }
 
 export function formatCalendarResults(results) {
