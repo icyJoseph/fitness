@@ -14,7 +14,7 @@ const MetricCard = ({ date, metrics }) => {
           displayName,
           unit,
           backgroundColor
-        } = getMetricMetaInfo();
+        } = getMetricMetaInfo(metric);
         return (
           <View style={styles.metric} key={metric}>
             {getIcon()}
