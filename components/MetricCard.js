@@ -4,7 +4,7 @@ import DateHeader from "./DateHeader";
 import { getMetricMetaInfo } from "../utils/helpers";
 import { gray } from "../utils/colors";
 
-const MetricCard = () => {
+const MetricCard = ({ date, metrics }) => {
   return (
     <View>
       {date && <DateHeader date={date} />}
