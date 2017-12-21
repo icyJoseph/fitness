@@ -49,7 +49,7 @@ export default class App extends Component {
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <View style={{ height: 20 }} />
-          <History />
+          <Tabs />
         </View>
       </Provider>
     );
