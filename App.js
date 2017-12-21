@@ -9,22 +9,28 @@ import History from "./components/History";
 import { purple, white } from "./utils/colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
-const Tabs = TabNavigator({
-  History: {
-    screen: History,
-    navigationOptions: {
-      tabBarLabel: "History",
-      tabBarIcon: ({ tintColor }) => (
-        <Iconicons name="ios-bookmarks" size={30} color={tintColor} />
-      )
+const Tabs = TabNavigator(
+  {
+    History: {
+      screen: History,
+      navigationOptions: {
+        tabBarLabel: "History",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
+        )
+      }
     },
     AddEntry: {
       screen: AddEntry,
-      tabBarLabel: "Add Entry",
-      tabBarIcon: ({ tintColor }) => (
-        <FontAwesome name="plus-square" size={30} color={tintColor} />
-      )
-    },
+      navigationOptions: {
+        tabBarLabel: "Add Entry",
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="plus-square" size={30} color={tintColor} />
+        )
+      }
+    }
+  },
+  {
     tabBarOptions: {
       activeTintColor: Platform.OS === "ios" ? purple : white,
       style: {
@@ -40,7 +46,7 @@ const Tabs = TabNavigator({
       }
     }
   }
-});
+);
 
 export default class App extends Component {
   render() {
