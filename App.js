@@ -6,7 +6,7 @@ import { TabNavigator } from "react-navigation";
 import reducer from "./reducers";
 import AddEntry from "./components/AddEntry";
 import History from "./components/History";
-import { purple, white } from "../utils/colors";
+import { purple, white } from "./utils/colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const Tabs = TabNavigator({
