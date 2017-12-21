@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Slider, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Slider,
+  Platform,
+  StatusBar
+} from "react-native";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { TabNavigator } from "react-navigation";
@@ -8,6 +15,15 @@ import AddEntry from "./components/AddEntry";
 import History from "./components/History";
 import { purple, white } from "./utils/colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { Constants } from "expo";
+
+const FitnessStatusBar = ({ backgroundColor, ...props }) => {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  );
+};
 
 const Tabs = TabNavigator(
   {
@@ -31,6 +47,9 @@ const Tabs = TabNavigator(
     }
   },
   {
+    navigationOptions: {
+      header: null
+    },
     tabBarOptions: {
       activeTintColor: Platform.OS === "ios" ? purple : white,
       style: {
@@ -53,7 +72,7 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
-          <View style={{ height: 20 }} />
+          <FitnessStatusBar backgroundColor={purple} barStyle="light-content" />
           <Tabs />
         </View>
       </Provider>
