@@ -14,7 +14,7 @@ import { calculateDirection } from "../utils/helpers";
 class Live extends Component {
   state = {
     coords: null,
-    status: null,
+    status: "undetermined",
     direction: ""
   };
 
@@ -28,10 +28,23 @@ class Live extends Component {
       })
       .catch(error => {
         console.warn("Error getting Location permission: ", error);
-        this.setState(() => ({ state: "undetermined" }));
+        this.setState(() => ({ status: "undetermined" }));
       });
   }
-  askPermission = () => {};
+
+  askPermission = () => {
+    Permissions.askAsync(Permissions.LOCATION)
+      .then(({ status }) => {
+        if (status === "granted") {
+          return this.setLocation();
+        }
+
+        this.setState(() => ({ status }));
+      })
+      .catch(error =>
+        console.warn("Error asking Location permission: ", error)
+      );
+  };
 
   setLocation = () => {
     Location.watchPositionAsync(
@@ -46,7 +59,7 @@ class Live extends Component {
 
         this.setState(() => ({
           coords,
-          state: "granted",
+          status: "granted",
           direction: newDirection
         }));
       }
@@ -55,12 +68,11 @@ class Live extends Component {
 
   render() {
     const { status, coords, direction } = this.state;
-
     if (status === null) {
       return <ActivityIndicator style={{ marginTop: 30 }} />;
     }
 
-    if (status == "denied") {
+    if (status === "denied") {
       return (
         <View style={styles.center}>
           <Foundation name="alert" size={50} />
@@ -68,21 +80,19 @@ class Live extends Component {
             You denied your location. You can fix this by visiting settings and
             enabling location services for this app.
           </Text>
+          <TouchableOpacity onPress={this.askPermission} style={styles.button}>
+            <Text style={styles.buttonText}>Enable</Text>
+          </TouchableOpacity>
         </View>
       );
     }
 
-    if (status == "undetermined") {
+    if (status === "undetermined") {
       return (
         <View style={styles.center}>
           <Foundation name="alert" size={50} />
           <Text>You need to enable location services for this app.</Text>
-          <TouchableOpacity
-            onPress={() => {
-              this.askPermission;
-            }}
-            style={styles.button}
-          >
+          <TouchableOpacity onPress={this.askPermission} style={styles.button}>
             <Text style={styles.buttonText}>Enable</Text>
           </TouchableOpacity>
         </View>
