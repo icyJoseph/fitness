@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, AsyncStorage } from "react-native";
 import {
   FontAwesome,
   MaterialIcons,
@@ -178,7 +178,7 @@ export function setLocalNotification() {
     .then(JSON.parse)
     .then(data => {
       if (data === null) {
-        Permissions.askAsync(Permission.NOTIFICATIONS).then(({ status }) => {
+        Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ state }) => {
           if (state === "granted") {
             Notifications.cancelAllScheduledNotificatioAsync();
 
