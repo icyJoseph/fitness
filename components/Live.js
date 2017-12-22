@@ -13,7 +13,7 @@ import { calculateDirection } from "../utils/helpers";
 
 class Live extends Component {
   state = {
-    coords: null,
+    coords: "",
     status: "undetermined",
     direction: ""
   };
@@ -50,7 +50,7 @@ class Live extends Component {
     Location.watchPositionAsync(
       {
         enableHighAccuracy: true,
-        timeInterval: 1,
+        timeInterval: 10,
         distanceInterval: 1
       },
       ({ coords }) => {
@@ -103,18 +103,21 @@ class Live extends Component {
       <View style={styles.container}>
         <View style={styles.directionContainer}>
           <Text style={styles.header}>You're heading</Text>
-          <Text style={styles.direction}>South</Text>
+          <Text style={styles.direction}>{direction}</Text>
         </View>
         <View style={styles.metricContainer}>
           <View style={styles.metric}>
             <Text style={[styles.header, { color: white }]}> Altitude </Text>
-            <Text style={[styles.subHeader, { color: white }]}> {200} m </Text>
+            <Text style={[styles.subHeader, { color: white }]}>
+              {" "}
+              {Math.round(coords.altitude)} meters{" "}
+            </Text>
           </View>
           <View style={styles.metric}>
             <Text style={[styles.header, { color: white }]}> Speed </Text>
             <Text style={[styles.subHeader, { color: white }]}>
               {" "}
-              {200} Km/h{" "}
+              {(coords.speed * 3.6).toFixed(1)} m/s{" "}
             </Text>
           </View>
         </View>
