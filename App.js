@@ -18,6 +18,7 @@ import { purple, white } from "./utils/colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Constants } from "expo";
 import Live from "./components/Live";
+import { setLocalNotification } from "./utils/helpers";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -94,6 +95,10 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
