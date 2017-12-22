@@ -20,6 +20,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { submitEntry, removeEntry } from "../utils/api";
 import { addEntry } from "../actions";
 import { white, purple } from "../utils/colors";
+import { NavigationActions } from "react-navigation";
 
 const SubmitBtn = ({ onPress }) => {
   return (
@@ -89,6 +90,7 @@ class AddEntry extends Component {
     }));
 
     // Navigate to home
+    this.toHome();
     // Save to DB
     submitEntry({ key, entry });
     // Clear Local Notification
@@ -96,7 +98,6 @@ class AddEntry extends Component {
 
   reset = () => {
     const key = timeToString();
-
     //Update Redux
     this.props.dispatch(
       addEntry({
@@ -104,8 +105,17 @@ class AddEntry extends Component {
       })
     );
     //Route to Home
+    this.toHome();
     //Update DB
     removeEntry(key);
+  };
+
+  toHome = () => {
+    this.props.navigation.dispatch(
+      NavigationActions.back({
+        key: "AddEntry"
+      })
+    );
   };
 
   render() {
