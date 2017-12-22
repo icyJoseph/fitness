@@ -14,7 +14,9 @@ import Steppers from "./Steppers";
 import {
   getMetricMetaInfo,
   timeToString,
-  getDailyReminderValue
+  getDailyReminderValue,
+  clearLocalNotification,
+  setLocalNotification
 } from "../utils/helpers";
 import { Ionicons } from "@expo/vector-icons";
 import { submitEntry, removeEntry } from "../utils/api";
@@ -94,6 +96,7 @@ class AddEntry extends Component {
     // Save to DB
     submitEntry({ key, entry });
     // Clear Local Notification
+    clearLocalNotification().then(setLocalNotification);
   };
 
   reset = () => {
