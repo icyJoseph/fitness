@@ -25,7 +25,7 @@ const Steppers = ({ max, unit, step, value, onIncrement, onDecrement }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={[
-              styles.androidBtn,
+              styles.iosBtn,
               { borderTopLeftRadius: 0, borderBottomRightRadius: 0 }
             ]}
             onPress={onIncrement}
