@@ -12,7 +12,7 @@ import { purple, white } from "../utils/colors";
 class Live extends Component {
   state = {
     coords: null,
-    status: "undetermined",
+    status: "denied",
     director: ""
   };
 
@@ -27,8 +27,12 @@ class Live extends Component {
 
     if (status == "denied") {
       return (
-        <View>
-          <Text>Denied</Text>
+        <View style={styles.center}>
+          <Foundation name="alert" size={50} />
+          <Text style={styles.text}>
+            You denied your location. You can fix this by visiting settings and
+            enabling location services for this app.
+          </Text>
         </View>
       );
     }
